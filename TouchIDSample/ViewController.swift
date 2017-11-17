@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    @IBAction func pressButton(_ sender: Any) {
+        let context = LAContext()
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            let localizedReason = "ログインに使用します"
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason, reply: { (success, error) in
+                if success {
+
+                }
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
